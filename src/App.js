@@ -38,7 +38,7 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Amatip IT Todo-List App</h1>
+            <h1>Amatip IT Todo-List App (TaskMaster)</h1>
             <input 
                 type="text" 
                 value={newTask}
