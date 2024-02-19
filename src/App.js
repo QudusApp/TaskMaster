@@ -1,50 +1,61 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 
-function App(){
-    const [task, setTask] = useState([]);
-    const [newTask, setNewTask] = useState('')
+function App() {
+    const [tasks, setTasks] = useState([]);
+    const [newTask, setNewTask] = useState('');
 
     useEffect(() => {
-        setTask(['To read my book by 8PM', 'To do the dishes']);
+        const savedTasks = JSON.parse(localStorage.getItem('tasks')) || ['To read my book by 8PM', 'To do the dishes'];
+        setTasks(savedTasks);
     }, []);
 
+    useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, [tasks]);
 
     const handleAddTask = () => {
-        if(newTask) {
-            setTask([...task, newTask]);
+        if (newTask.trim()) {
+            setTasks([...tasks, newTask.trim()]);
             setNewTask('');
         }
-    }
+    };
 
-    const handleDeleTask = (index) => {
-        const copyTask = task.slice();
-        copyTask.splice(index, 1);
-        setTask(copyTask);
-    }
+    const handleDeleteTask = (index) => {
+        const updatedTasks = tasks.filter((_, i) => i !== index);
+        setTasks(updatedTasks);
+    };
 
-    return(
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleAddTask();
+        }
+    };
+
+    return (
         <div className="App">
             <h1>Amatip IT Todo-List App</h1>
-            <input 
-            type="text" 
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-            placeholder="Enter a new task"
-            />
-            <button onClick={handleAddTask}>Add</button>
+            <div>
+                <input 
+                    type="text" 
+                    value={newTask}
+                    onChange={(e) => setNewTask(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Enter a new task"
+                />
+                <button onClick={handleAddTask}>Add</button>
+            </div>
             
             <ul>
-                {task.map((task, index) => (
+                {tasks.map((task, index) => (
                     <li key={index}>
                         {task}
-                        <button onClick={handleDeleTask}>Delete</button>
+                        <button onClick={() => handleDeleteTask(index)}>Delete</button>
                     </li>
                 ))}
             </ul>
         </div>
-        
-    )
+    );
 }
 
 export default App;
