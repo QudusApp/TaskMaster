@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/https//QudusApp.github.io/TaskMaster/static/css/main.35643b4d.css",
-    "main.js": "/https//QudusApp.github.io/TaskMaster/static/js/main.246b32a9.js",
-    "index.html": "/https//QudusApp.github.io/TaskMaster/index.html",
-    "main.35643b4d.css.map": "/https//QudusApp.github.io/TaskMaster/static/css/main.35643b4d.css.map",
-    "main.246b32a9.js.map": "/https//QudusApp.github.io/TaskMaster/static/js/main.246b32a9.js.map"
+    "main.css": "/TaskMaster/static/css/main.35643b4d.css",
+    "main.js": "/TaskMaster/static/js/main.246b32a9.js",
+    "index.html": "/TaskMaster/index.html",
+    "main.35643b4d.css.map": "/TaskMaster/static/css/main.35643b4d.css.map",
+    "main.246b32a9.js.map": "/TaskMaster/static/js/main.246b32a9.js.map"
   },
   "entrypoints": [
     "static/css/main.35643b4d.css",
