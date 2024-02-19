@@ -6,7 +6,7 @@ function App() {
     const [newTask, setNewTask] = useState('');
 
     useEffect(() => {
-        const savedTasks = JSON.parse(localStorage.getItem('tasks')) || ['To read my book by 8PM', 'To do the dishes'];
+        const savedTasks = JSON.parse(localStorage.getItem('tasks'));
         setTasks(savedTasks);
     }, []);
 
@@ -34,7 +34,7 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Amatip IT Todo-List App</h1>
+            <h2>AMATIP IT TODO-LIST APP</h2>
             <div>
                 <input 
                     type="text" 
