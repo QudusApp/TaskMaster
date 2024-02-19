@@ -3,49 +3,49 @@ import './App.css';
 
 function App() {
     const [tasks, setTasks] = useState([]);
-    const [newTask, setNewTask] = useState('');
 
     useEffect(() => {
-        const savedTasks = JSON.parse(localStorage.getItem('tasks')) || ['To read my book by 8PM', 'To do the dishes'];
-        setTasks(savedTasks);
+        // Load tasks from local storage
+        const savedTasks = localStorage.getItem('tasks');
+        if (savedTasks) {
+            setTasks(JSON.parse(savedTasks));
+        } else {
+            // Default tasks if none are found in local storage
+            setTasks(['To read my book by 8PM', 'To do the dishes']);
+        }
     }, []);
 
     useEffect(() => {
+        // Save tasks to local storage
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }, [tasks]);
 
     const handleAddTask = () => {
         if (newTask.trim()) {
-            setTasks([...tasks, newTask.trim()]);
-            setNewTask('');
+            const updatedTasks = [...tasks, newTask.trim()];
+            setTasks(updatedTasks);
+            console.log('Tasks after addition:', updatedTasks);
         }
     };
 
     const handleDeleteTask = (index) => {
         const updatedTasks = tasks.filter((_, i) => i !== index);
         setTasks(updatedTasks);
+        console.log('Tasks after deletion:', updatedTasks);
     };
 
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleAddTask();
-        }
-    };
+    const [newTask, setNewTask] = useState('');
 
     return (
         <div className="App">
             <h1>Amatip IT Todo-List App</h1>
-            <div>
-                <input 
-                    type="text" 
-                    value={newTask}
-                    onChange={(e) => setNewTask(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Enter a new task"
-                />
-                <button onClick={handleAddTask}>Add</button>
-            </div>
-            
+            <input 
+                type="text" 
+                value={newTask}
+                onChange={(e) => setNewTask(e.target.value)}
+                placeholder="Enter a new task"
+            />
+            <button onClick={handleAddTask}>Add</button>
             <ul>
                 {tasks.map((task, index) => (
                     <li key={index}>
